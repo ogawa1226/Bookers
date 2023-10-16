@@ -1,0 +1,16 @@
+<h2>New book</h2>
+
+<%= form_with model: @book. do |f| %>
+  
+  <h5>Title</h5> <!--font-size 13px-->
+  <%= f.text_field :title %>
+  
+  <h5>Body</h5> <!--font-size 13px-->
+  <%= f.text_area :body %>
+
+  <%= f.submit 'Create Boox' %>
+
+
+
+
+<% end %>
