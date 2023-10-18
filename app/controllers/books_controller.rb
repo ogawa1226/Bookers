@@ -3,18 +3,38 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Bookers.new
+    @books = Book.all
+    @book = Book.new
   end
   
   def create
-    books = List.new(list_params)  
-    books.save
-    redirect_to '/top' #topではない、、、
- end
+    @book = Book.new(book_params)
+    if @book.save
+      flash[:notice] = "successfully" 
+      redirect_to book_path(@book.id)
+    else
+      flash.now[:notice] ="error"
+      @books = Book.all
+      render :index
+    end
+  end
 
   def show
+    @book = Book.find(params[:id])  
   end
 
   def edit
+    @book = Book.find(params[:id])
+  end
+  
+  def destroy
+    book = Book.find(params[:id])  
+    book.destroy 
+    redirect_to '/books'  
+  end
+  
+  private
+  def book_params
+    params.require(:book).permit(:title, :body)
   end
 end
