@@ -1,5 +1,14 @@
 <h1>Eding Book</h1>
 
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errores prohibited this book from begin saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 
 <%= form_with model: @book do |f| %>
   
@@ -9,21 +18,15 @@
   <h5>Body</h5> 
   <%= f.text_area :body %>
    
- <%= f.submit 'Update Book' %>
+  <%= f.submit 'Update Book' %>
+
 
 
 <% end %>
 
 
 
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>errores prohibited this book from begin saved:
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+
 
 
 
